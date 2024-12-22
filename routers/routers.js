@@ -1,9 +1,19 @@
-const demoRouter = require('./demoRouters')
+const userRouter = require('./userRouter')
+const noteRouter = require('./noteRouter')
+const bookRouter = require('./bookRouter')
 
 const routers = [
     {
-        path : '/api/demo',
-        handler : demoRouter
+        path : '/api/user',
+        handler : userRouter
+    },
+    {
+        path : '/api/book',
+        handler : bookRouter
+    },
+    {
+        path : '/api/note',
+        handler : noteRouter
     },
     {
         path : '/',

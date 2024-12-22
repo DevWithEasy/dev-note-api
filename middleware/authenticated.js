@@ -10,7 +10,7 @@ const authenticated=(req,res,next)=>{
                     message : 'Authentication failed'
                 })
             }else{
-                req.body.userId = decode.id
+                req.user = decode.id
                 next()
             }
         })
