@@ -19,7 +19,7 @@ const bookSchema = mongoose.Schema({
     },
     icon:{
         type: String,
-        required:true
+        default : 'book'
     }
 },{
     timestamps:true

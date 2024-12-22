@@ -6,7 +6,6 @@ const Book = require("../models/Book")
 
 exports.signup=async(req,res,next) =>{
     try {
-        console.log(req.body)
         const { email, password } = req.body
 
         //find exists userEmail

@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required:true
     },
+    favourite:{
+        type: [{type : mongoose.Types.ObjectId,ref : 'Note'}],
+        default: []
+    },
 },{
     timestamps:true
 })
