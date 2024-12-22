@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const demoSchema = mongoose.Schema({
+const bookSchema = mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -25,5 +25,5 @@ const demoSchema = mongoose.Schema({
     timestamps:true
 })
 
-const Demo = mongoose.model('Demo',demoSchema)
-module.exports = Demo
+const Book = mongoose.model('Book',bookSchema)
+module.exports = Book

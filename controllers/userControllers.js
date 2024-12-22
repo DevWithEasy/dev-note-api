@@ -1,6 +1,8 @@
 const User = require("../models/User")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+const Note = require("../models/Note")
+const Book = require("../models/Book")
 
 exports.signup=async(req,res,next) =>{
     try {
@@ -74,6 +76,28 @@ exports.signin=async(req,res,next) =>{
             token: token,
             data: user
         })
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            status : 500,
+            message : error.message
+        })
+    }
+}
+
+exports.getDocCollection=async(req,res,next) =>{
+    try {
+    const books = await Book.find({user : req.user})
+    const notes = await Note.find({user : req.user}).select('title icon')
+    return res.status(200).json({
+        success : true,
+        status : 200,
+        message : 'Document found',
+        data : {
+            books,
+            notes
+        }
+    })
     } catch (error) {
         return res.status(500).json({
             success : false,
