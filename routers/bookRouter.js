@@ -4,7 +4,7 @@ const authenticated = require('../middleware/authenticated')
 const router = require('express').Router()
 
 router.post('/create',authenticated,createBook)
-router.put('/',updateBook)
+router.put('/:id',updateBook)
 router.delete('/',deleteBook)
 router.get('/',getBook)
 router.post('/',getAllBook)
