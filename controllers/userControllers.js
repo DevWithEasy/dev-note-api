@@ -26,7 +26,12 @@ exports.signup=async(req,res,next) =>{
             password: hashed,
         })
 
-        await newUser.save()
+        const user = await newUser.save()
+
+        await new Book({
+            user: user._id,
+            name: user._id,
+        }).save()
 
         res.status(200).json({
             success: "success",
@@ -86,15 +91,18 @@ exports.signin=async(req,res,next) =>{
 
 exports.getDocCollection=async(req,res,next) =>{
     try {
-    const books = await Book.find({user : req.user})
-    const notes = await Note.find({user : req.user}).select('title icon')
+    const books = await Book.find({
+        user : req.user,
+        name : {$ne : req.user}
+    })
+    const book = await Book.findOne({name : req.user}).populate('notes')
     return res.status(200).json({
         success : true,
         status : 200,
         message : 'Document found',
         data : {
             books,
-            notes
+            notes : book.notes
         }
     })
     } catch (error) {

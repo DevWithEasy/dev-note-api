@@ -25,6 +25,10 @@ const noteSchema = mongoose.Schema({
         type: String,
         default: 'doc'
     },
+    isPublish: {
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 })

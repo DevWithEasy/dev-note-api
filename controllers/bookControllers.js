@@ -78,3 +78,29 @@ exports.getAllBook = async (req, res, next) => {
         })
     }
 }
+
+exports.getBookNotes=async(req,res,next) =>{
+    try {
+    const book = await Book.findById(req.params.id).populate('notes')
+    if(!book){
+        return res.status(404).json({
+            success : false,
+            status : 404,
+            message : 'Book not found'
+        })
+    }else{
+        return res.status(200).json({
+            success : true,
+            status : 200,
+            message : 'Document found',
+            data : book.notes
+        })
+    }
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            status : 500,
+            message : error.message
+        })
+    }
+}
