@@ -113,3 +113,29 @@ exports.getDocCollection=async(req,res,next) =>{
         })
     }
 }
+
+exports.getIndexData=async(req,res,next) =>{
+    try {
+    const notes = await Note.find({isPublish : true}).populate('user','-_id name')
+
+    const allKeywords = notes.flatMap(note => note.keywords)
+    const keywords = [...new Set(allKeywords)]
+
+    return res.status(200).json({
+        success : true,
+        status : 200,
+        message : 'Document found',
+        data : {
+            notes,
+            keywords
+        }
+    })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success : false,
+            status : 500,
+            message : error.message
+        })
+    }
+}
