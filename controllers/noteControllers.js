@@ -119,6 +119,31 @@ exports.publishNote = async (req, res, next) => {
     }
 }
 
+exports.unPublishNote = async (req, res, next) => {
+    try {
+
+        const note = await Note.findByIdAndUpdate(req.params.id,
+            {
+                isPublish: false,
+            },
+            { new: true }
+        )
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Document published successfully',
+            data: note
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            status: 500,
+            message: error.message
+        })
+    }
+}
+
 exports.getNoteSerachByKey = async (req, res, next) => {
     try {
         const {key} = req.query

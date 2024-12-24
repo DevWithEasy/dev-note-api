@@ -1,4 +1,4 @@
-const { createNote, updateNoteTitle, deleteNote, getNote, getBookNotes, publishNote, getNoteSerachByKey, getNoteSerachBytext } = require('../controllers/noteControllers')
+const { createNote, updateNoteTitle, deleteNote, getNote, getBookNotes, publishNote, getNoteSerachByKey, getNoteSerachBytext, unPublishNote } = require('../controllers/noteControllers')
 const authenticated = require('../middleware/authenticated')
 
 const router = require('express').Router()
@@ -10,5 +10,6 @@ router.get('/:id', authenticated, getNote)
 router.put('/update/:id',authenticated, updateNoteTitle)
 router.delete('/delete/:id',authenticated, deleteNote)
 router.put('/publish/:id', authenticated, publishNote)
+router.put('/un_publish/:id', authenticated, unPublishNote)
 
 module.exports = router

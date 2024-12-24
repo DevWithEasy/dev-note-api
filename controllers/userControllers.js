@@ -116,7 +116,7 @@ exports.getDocCollection=async(req,res,next) =>{
 
 exports.getIndexData=async(req,res,next) =>{
     try {
-    const notes = await Note.find({isPublish : true}).populate('user','-_id name')
+    const notes = await Note.find({isPublish : true}).populate('user','-_id name').select('-description -isPublish')
 
     const allKeywords = notes.flatMap(note => note.keywords)
     const keywords = [...new Set(allKeywords)]
