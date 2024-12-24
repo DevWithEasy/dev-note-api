@@ -9,14 +9,6 @@ const bookSchema = mongoose.Schema({
         type: String,
         required:true
     },
-    notes : {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Note'
-            }
-        ]
-    },
     icon:{
         type: String,
         default : 'book'

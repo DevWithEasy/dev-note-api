@@ -1,4 +1,5 @@
 const Book = require("../models/Book")
+const Note = require("../models/Note")
 
 exports.createBook = async (req, res, next) => {
     try {
@@ -81,21 +82,13 @@ exports.getAllBook = async (req, res, next) => {
 
 exports.getBookNotes=async(req,res,next) =>{
     try {
-    const book = await Book.findById(req.params.id).populate('notes')
-    if(!book){
-        return res.status(404).json({
-            success : false,
-            status : 404,
-            message : 'Book not found'
-        })
-    }else{
-        return res.status(200).json({
-            success : true,
-            status : 200,
-            message : 'Document found',
-            data : book.notes
-        })
-    }
+    const notes = await Note.find({book : req.params.id})
+    return res.status(200).json({
+        success : true,
+        status : 200,
+        message : 'Document found',
+        data : notes
+    })
     } catch (error) {
         return res.status(500).json({
             success : false,

@@ -95,14 +95,18 @@ exports.getDocCollection=async(req,res,next) =>{
         user : req.user,
         name : {$ne : req.user}
     })
-    const book = await Book.findOne({name : req.user}).populate('notes')
+
+    const book = await Book.findOne({name : req.user})
+
+    const notes = await Note.find({book : book._id})
+
     return res.status(200).json({
         success : true,
         status : 200,
         message : 'Document found',
         data : {
             books,
-            notes : book.notes
+            notes
         }
     })
     } catch (error) {

@@ -5,6 +5,10 @@ const noteSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    book: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book'
+    },
     title: {
         type: String,
         default : 'Untitled Document'

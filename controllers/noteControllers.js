@@ -6,14 +6,14 @@ exports.createNote = async (req, res, next) => {
 
         const findBook = await Book.findOne({ name: req.user })
 
-        const newDocument = new Note({
-            user: req.user
-        })
-        const document = await newDocument.save()
-
         const bookid = req.query.is_book === 'yes' && req.query.book ? req.query.book : findBook._id
 
-        await Book.findByIdAndUpdate(bookid, { $push: { notes: document._id } }, { new: true })
+        const newDocument = new Note({
+            user: req.user,
+            book: bookid
+        })
+        
+        const document = await newDocument.save()
 
         return res.status(200).json({
             success: true,
